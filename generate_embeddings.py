@@ -13,3 +13,13 @@ print(f"Number of words: {len(words)}")
 print(f"Shape of embeddings: {embeddings.shape}")  
 print(f"\nFirst 10 numbers for the word 'king':")
 print(embeddings[0][:10])
+
+from sklearn.decomposition import PCA
+
+# Compress 384 dimensions down to 2 dimensions
+pca = PCA(n_components=2)
+embeddings_2d = pca.fit_transform(embeddings)
+
+# Print the 2D version for each word
+for word, coord in zip(words, embeddings_2d):
+    print(f"{word}: {coord}")
